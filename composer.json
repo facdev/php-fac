@@ -1,0 +1,23 @@
+{
+    "name": "php-utils/fac",
+    "type": "library",
+    "description": "Простой набор примитивов",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitriy Tyurin",
+            "email": "fobia3d@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0",
+        "ext-spl": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Fac": "Fac"
+        }
+    },
+    "target-dir": ""
+}
