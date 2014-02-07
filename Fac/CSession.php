@@ -70,5 +70,4 @@ class CSession implements \Countable, \IteratorAggregate
     {
         return count((array) $_SESSION);
     }
-
 }

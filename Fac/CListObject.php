@@ -7,7 +7,6 @@
  * @license The MIT License (MIT) Dmitryi Tyurin
  */
 
-
 namespace Fac;
 
 /**
@@ -15,17 +14,20 @@ namespace Fac;
  *
  * @package		Fac
  */
-class CListObject implements \IteratorAggregate, \Countable {
+class CListObject implements \IteratorAggregate, \Countable
+{
 
-    protected $_data   = array();
+    protected $_data = array();
     private $_couunt = 0;
 
-    function __construct(array $data = array()) {
+    function __construct(array $data = array())
+    {
         $this->_data   = $data;
         $this->_couunt = count($this->_data);
     }
 
-    public function __get($param) {
+    public function __get($param)
+    {
         $arr = array();
         foreach ($this->_data as $object) {
             $arr[] = $object->$param;
@@ -33,17 +35,18 @@ class CListObject implements \IteratorAggregate, \Countable {
         return $arr;
     }
 
-    public function __set($param, $value) {
+    public function __set($param, $value)
+    {
         foreach ($this->_data as $object) {
             $object->$param = $value;
         }
     }
 
-    public function addAt($object, $index = null) {
+    public function addAt($object, $index = null)
+    {
         if ($index === null) {
             array_push($this->_data, $object);
-        }
-        elseif ($index === 0) {
+        } elseif ($index === 0) {
             array_unshift($this->_data, $object);
         } else {
             $arr = array();
@@ -53,7 +56,7 @@ class CListObject implements \IteratorAggregate, \Countable {
                 }
                 array_push($arr, $this->_data[$i]);
             }
-            $this->_data   = $arr;
+            $this->_data = $arr;
         }
         $this->_couunt = count($this->_data);
     }
@@ -61,7 +64,8 @@ class CListObject implements \IteratorAggregate, \Countable {
     /**
      * @return self
      */
-    public function getUnique() {
+    public function getUnique()
+    {
         $arr = array();
         foreach ($this->_data as $object) {
             if (!in_array($object, $arr)) {
@@ -71,7 +75,8 @@ class CListObject implements \IteratorAggregate, \Countable {
         return new self($arr);
     }
 
-    public function getItemsAtAttr($param, $value) {
+    public function getItemsAtAttr($param, $value)
+    {
         $arr = array();
         foreach ($this->_data as $object) {
             if ($object->$param == $value) {
@@ -81,20 +86,23 @@ class CListObject implements \IteratorAggregate, \Countable {
         return new self($arr);
     }
 
-    public function removeAt($index = null) {
+    public function removeAt($index = null)
+    {
         if ($index === null) {
-            $index         = $this->_couunt - 1;
+            $index = $this->_couunt - 1;
         }
         unset($this->_data[$index]);
         $this->_data   = array_values($this->_data);
         $this->_couunt = count($this->_data);
     }
 
-    public function first() {
+    public function first()
+    {
         return $this->_data[0];
     }
 
-    public function last() {
+    public function last()
+    {
         return $this->_data[$this->_couunt - 1];
     }
 
@@ -103,20 +111,23 @@ class CListObject implements \IteratorAggregate, \Countable {
      * @param integer $index
      * @return stdObject
      */
-    public function itemAt($index) {
+    public function itemAt($index)
+    {
         return $this->_data[$index];
     }
 
-    public function count() {
+    public function count()
+    {
         return $this->_couunt;
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         return $this->_data;
     }
 
-    public function getIterator() {
+    public function getIterator()
+    {
         return new \ArrayIterator($this->_data);
     }
-
 }

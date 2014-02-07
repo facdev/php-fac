@@ -14,13 +14,16 @@ namespace Fac;
  *
  * @package		Fac
  */
-class CDataObject extends CObject implements \IteratorAggregate, \Countable {
+class CDataObject extends CObject implements \IteratorAggregate, \Countable
+{
+
     /**
      * @var array
      */
     protected $_data = array();
 
-    public function __construct($data = null) {
+    public function __construct($data = null)
+    {
         parent::__construct();
         if ($data !== null) {
             foreach ($data as $k => $v) {
@@ -29,36 +32,42 @@ class CDataObject extends CObject implements \IteratorAggregate, \Countable {
         }
     }
 
-    public function __get($name) {
+    public function __get($name)
+    {
         return $this->_data[$name];
     }
 
-    public function __isset($name) {
+    public function __isset($name)
+    {
         return (array_key_exists($name, $this->_data));
     }
 
-    public function __set($name, $value) {
+    public function __set($name, $value)
+    {
         $this->_data[$name] = $value;
     }
 
-    public function __unset($name) {
+    public function __unset($name)
+    {
         unset($this->_data[$name]);
     }
 
-    public function count() {
+    public function count()
+    {
         return coun($this->_data);
     }
 
-    public function getIterator() {
+    public function getIterator()
+    {
         return new \ArrayIterator($this->_data);
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         $arr = array();
-        foreach($this as $key=>$value) {
+        foreach ($this as $key => $value) {
             $arr[$key] = $value;
         }
         return $arr;
     }
-
 }

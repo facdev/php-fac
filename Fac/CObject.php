@@ -14,21 +14,25 @@ namespace Fac;
  *
  * @package		Fac
  */
-class CObject {
+class CObject
+{
 
-    function __construct($data = null) {
+    function __construct($data = null)
+    {
         if ($data !== null) {
             $this->merge($data);
         }
     }
 
-    public function merge($obj) {
+    public function merge($obj)
+    {
         foreach ($obj as $k => $v) {
             $this->$k = $v;
         }
     }
 
-    public function mergeRecursive($obj) {
+    public function mergeRecursive($obj)
+    {
         foreach ($obj as $k => $v) {
             if (is_array($v) || is_object($v)) {
                 if (!is_object($this->$k)) {
@@ -40,6 +44,4 @@ class CObject {
             }
         }
     }
-
 }
-

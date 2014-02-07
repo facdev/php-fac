@@ -6,7 +6,8 @@
     "authors": [
         {
             "name": "Dmitriy Tyurin",
-            "email": "fobia3d@gmail.com"
+            "email": "fobia3d@gmail.com",
+            "role": "Developer"
         }
     ],
     "minimum-stability": "dev",
@@ -19,7 +20,6 @@
             "Fac\\": ""
         }
     },
-    "target-dir": "",
     "extra": {
         "branch-alias": {
             "dev-master": "0.1.x-dev"

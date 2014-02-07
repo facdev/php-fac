@@ -1,13 +1,15 @@
 <?php
 
 namespace Fac;
+
 /**
  * Offers different validation methods.
  *
  * @package       Cake.Utility
  * @since         CakePHP v 1.2.0.3830
  */
-class CValidation {
+class CValidation
+{
 
     /**
      * Some complex patterns needed in multiple places
@@ -37,7 +39,8 @@ class CValidation {
      * @param string|array $check Value to check
      * @return boolean Success
      */
-    public static function notEmpty($check){
+    public static function notEmpty($check)
+    {
         if (is_array($check)) {
             extract(self::_defaults($check));
         }
@@ -57,7 +60,8 @@ class CValidation {
      * @param string|array $check Value to check
      * @return boolean Success
      */
-    public static function alphaNumeric($check){
+    public static function alphaNumeric($check)
+    {
         if (is_array($check)) {
             extract(self::_defaults($check));
         }
@@ -78,7 +82,8 @@ class CValidation {
      * @param integer $max Maximum value in range (inclusive)
      * @return boolean Success
      */
-    public static function between($check, $min, $max){
+    public static function between($check, $min, $max)
+    {
         $length = mb_strlen($check);
         return ($length >= $min && $length <= $max);
     }
@@ -93,7 +98,8 @@ class CValidation {
      * @param string|array $check Value to check
      * @return boolean Success
      */
-    public static function blank($check){
+    public static function blank($check)
+    {
         if (is_array($check)) {
             extract(self::_defaults($check));
         }
@@ -111,11 +117,13 @@ class CValidation {
      * @param integer $check2 only needed if $check1 is a string
      * @return boolean Success
      */
-    public static function comparison($check1, $operator = null, $check2 = null){
+    public static function comparison($check1, $operator = null, $check2 = null)
+    {
         if (is_array($check1)) {
             extract($check1, EXTR_OVERWRITE);
         }
-        $operator = str_replace(array(' ', "\t", "\n", "\r", "\0", "\x0B"), '', strtolower($operator));
+        $operator = str_replace(array(' ', "\t", "\n", "\r", "\0", "\x0B"), '',
+                                strtolower($operator));
 
         switch ($operator) {
             case 'isgreater':
@@ -169,7 +177,8 @@ class CValidation {
      * @param string $regex If $check is passed as a string, $regex must also be set to valid regular expression
      * @return boolean Success
      */
-    public static function custom($check, $regex = null){
+    public static function custom($check, $regex = null)
+    {
         if (is_array($check)) {
             extract(self::_defaults($check));
         }
@@ -185,7 +194,8 @@ class CValidation {
      * @param int $year
      * @return boolean Success
      */
-    public static function year($year, $minYear = 1901, $maxYear = 2155){
+    public static function year($year, $minYear = 1901, $maxYear = 2155)
+    {
         return (($year > $minYear) && ($year < $maxYear)) ? true : false;
     }
 
@@ -205,7 +215,8 @@ class CValidation {
      * @param string $regex If a custom regular expression is used this is the only validation that will occur.
      * @return boolean Success
      */
-    public static function date($check, $format = 'ymd', $regex = null){
+    public static function date($check, $format = 'ymd', $regex = null)
+    {
         if (!is_null($regex)) {
             return self::_check($check, $regex);
         }
@@ -248,7 +259,8 @@ class CValidation {
      * @see Validation::date
      * @see Validation::time
      */
-    public static function datetime($check, $dateFormat = 'ymd', $regex = null){
+    public static function datetime($check, $dateFormat = 'ymd', $regex = null)
+    {
         $valid = false;
         $parts = explode(' ', $check);
         if (!empty($parts) && count($parts) > 1) {
@@ -267,11 +279,13 @@ class CValidation {
      * @param string $check a valid time string
      * @return boolean Success
      */
-    public static function time($check){
+    public static function time($check)
+    {
         return self::_check($check, '%^((0?[1-9]|1[012])(:[0-5]\d){0,2} ?([AP]M|[ap]m))$|^([01]\d|2[0-3])(:[0-5]\d){0,2}$%');
     }
 
-    public static function realtime($check){
+    public static function realtime($check)
+    {
         $y = 1901;
         $m = $d = $h = $i = $s = 0;
 
@@ -289,7 +303,7 @@ class CValidation {
         $time_old = mktime($h, $i, $s, $m, $d, $y);
         $time_now = explode(" ", microtime());
 
-        $dt   = (int) (($time_old - $time_now[1]) / 60);
+        $dt = (int) (($time_old - $time_now[1]) / 60);
 
         if ($dt < -10)
             return false;
@@ -303,7 +317,8 @@ class CValidation {
      * @param string $check a valid boolean
      * @return boolean Success
      */
-    public static function boolean($check){
+    public static function boolean($check)
+    {
         $booleanList = array(0, 1, '0', '1', true, false);
         return in_array($check, $booleanList, true);
     }
@@ -322,7 +337,8 @@ class CValidation {
      * @param string $regex If a custom regular expression is used, this is the only validation that will occur.
      * @return boolean Success
      */
-    public static function decimal($check, $places = null, $regex = null){
+    public static function decimal($check, $places = null, $regex = null)
+    {
         if (is_null($regex)) {
             $lnum = '[0-9]+';
             $dnum = "[0-9]*[\.]{$lnum}";
@@ -356,20 +372,22 @@ class CValidation {
      * @param string $regex Regex to use (if none it will use built in regex)
      * @return boolean Success
      */
-    public static function email($check, $deep = false, $regex = null){
+    public static function email($check, $deep = false, $regex = null)
+    {
         if (is_array($check)) {
             extract(self::_defaults($check));
         }
 
         if (is_null($regex)) {
-            $regex  = '/^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@' . self::$_pattern['hostname'] . '$/i';
+            $regex = '/^[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*@' . self::$_pattern['hostname'] . '$/i';
         }
         $return = self::_check($check, $regex);
         if ($deep === false || $deep === null) {
             return $return;
         }
 
-        if ($return === true && preg_match('/@(' . self::$_pattern['hostname'] . ')$/i', $check, $regs)) {
+        if ($return === true && preg_match('/@(' . self::$_pattern['hostname'] . ')$/i',
+                                           $check, $regs)) {
             if (function_exists('getmxrr') && getmxrr($regs[1], $mxhosts)) {
                 return true;
             }
@@ -388,7 +406,8 @@ class CValidation {
      * @param mixed $comparedTo Value to compare
      * @return boolean Success
      */
-    public static function equalTo($check, $comparedTo){
+    public static function equalTo($check, $comparedTo)
+    {
         return ($check === $comparedTo);
     }
 
@@ -399,7 +418,8 @@ class CValidation {
      * @param array $extensions file extensions to allow. By default extensions are 'gif', 'jpeg', 'png', 'jpg'
      * @return boolean Success
      */
-    public static function extension($check, $extensions = array('gif', 'jpeg', 'png', 'jpg')){
+    public static function extension($check, $extensions = array('gif', 'jpeg', 'png', 'jpg'))
+    {
         if (is_array($check)) {
             return self::extension(array_shift($check), $extensions);
         }
@@ -419,7 +439,8 @@ class CValidation {
      * @param string $type The IP Protocol version to validate against
      * @return boolean Success
      */
-    public static function ip($check, $type = 'both'){
+    public static function ip($check, $type = 'both')
+    {
         $type  = strtolower($type);
         $flags = 0;
         if ($type === 'ipv4') {
@@ -428,7 +449,8 @@ class CValidation {
         if ($type === 'ipv6') {
             $flags = FILTER_FLAG_IPV6;
         }
-        return (boolean) filter_var($check, FILTER_VALIDATE_IP, array('flags' => $flags));
+        return (boolean) filter_var($check, FILTER_VALIDATE_IP,
+                                    array('flags' => $flags));
     }
 
     /**
@@ -438,7 +460,8 @@ class CValidation {
      * @param integer $min The minimal string length
      * @return boolean Success
      */
-    public static function minLength($check, $min){
+    public static function minLength($check, $min)
+    {
         return mb_strlen($check) >= $min;
     }
 
@@ -449,7 +472,8 @@ class CValidation {
      * @param integer $max The maximal string length
      * @return boolean Success
      */
-    public static function maxLength($check, $max){
+    public static function maxLength($check, $max)
+    {
         return mb_strlen($check) <= $max;
     }
 
@@ -467,10 +491,11 @@ class CValidation {
      * @param boolean $strict Defaults to true, set to false to disable strict type check
      * @return boolean Success
      */
-    public static function multiple($check, $options = array(), $strict = true){
-        $defaults = array('in'     => null, 'max'    => null, 'min'    => null);
-        $options = array_merge($defaults, $options);
-        $check   = array_filter((array) $check);
+    public static function multiple($check, $options = array(), $strict = true)
+    {
+        $defaults = array('in' => null, 'max' => null, 'min' => null);
+        $options  = array_merge($defaults, $options);
+        $check    = array_filter((array) $check);
         if (empty($check)) {
             return false;
         }
@@ -496,16 +521,19 @@ class CValidation {
      * @param string $check Value to check
      * @return boolean Success
      */
-    public static function numeric($check){
+    public static function numeric($check)
+    {
         return is_numeric($check);
     }
 
-    public static function integer($check) {
+    public static function integer($check)
+    {
         return is_integer($check);
     }
 
-    public static function float($check) {
-       return is_float($check);
+    public static function float($check)
+    {
+        return is_float($check);
     }
 
     /**
@@ -516,7 +544,8 @@ class CValidation {
      * @return boolean Success
      * @see http://en.wikipedia.org/wiki/Natural_number
      */
-    public static function naturalNumber($check, $allowZero = false){
+    public static function naturalNumber($check, $allowZero = false)
+    {
         $regex = $allowZero ? '/^(?:0|[1-9][0-9]*)$/' : '/^[1-9][0-9]*$/';
         return self::_check($check, $regex);
     }
@@ -531,7 +560,8 @@ class CValidation {
      * @param integer $upper Upper limit
      * @return boolean Success
      */
-    public static function range($check, $lower = null, $upper = null){
+    public static function range($check, $lower = null, $upper = null)
+    {
         if (!is_numeric($check)) {
             return false;
         }
@@ -558,11 +588,12 @@ class CValidation {
      * @param boolean $strict Require URL to be prefixed by a valid scheme (one of http(s)/ftp(s)/file/news/gopher)
      * @return boolean Success
      */
-    public static function url($check, $strict = false){
+    public static function url($check, $strict = false)
+    {
         self::_populateIp();
         $validChars = '([' . preg_quote('!"$&\'()*+,-.@_:;=~[]') . '\/0-9a-z\p{L}\p{N}]|(%[0-9a-f]{2}))';
-        $regex      = '/^(?:(?:https?|ftps?|sftp|file|news|gopher):\/\/)' . (!empty($strict)
-                            ? '' : '?') .
+        $regex      = '/^(?:(?:https?|ftps?|sftp|file|news|gopher):\/\/)'
+                . (!empty($strict) ? '' : '?') .
                 '(?:' . self::$_pattern['IPv4'] . '|\[' . self::$_pattern['IPv6'] . '\]|' . self::$_pattern['hostname'] . ')(?::[1-9][0-9]{0,4})?' .
                 '(?:\/?|\/' . $validChars . '*)?' .
                 '(?:\?' . $validChars . '*)?' .
@@ -578,7 +609,8 @@ class CValidation {
      * @param boolean $strict Defaults to true, set to false to disable strict type check
      * @return boolean Success
      */
-    public static function inList($check, $list, $strict = true){
+    public static function inList($check, $list, $strict = true)
+    {
         return in_array($check, $list, $strict);
     }
 
@@ -591,8 +623,10 @@ class CValidation {
      * @param array $args arguments to send to method
      * @return mixed user-defined class class method returns
      */
-    public static function userDefined($check, $object, $method, $args = null){
-        return call_user_func_array(array($object, $method), array($check, $args));
+    public static function userDefined($check, $object, $method, $args = null)
+    {
+        return call_user_func_array(array($object, $method),
+                                    array($check, $args));
     }
 
     /**
@@ -601,7 +635,8 @@ class CValidation {
      * @param string $check Value to check
      * @return boolean Success
      */
-    public static function uuid($check){
+    public static function uuid($check)
+    {
         $regex = '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i';
         return self::_check($check, $regex);
     }
@@ -616,14 +651,15 @@ class CValidation {
      * @param string $classPrefix The prefix for the class to do the validation.
      * @return mixed Return of Passed method, false on failure
      */
-    protected static function _pass($method, $check, $classPrefix){
+    protected static function _pass($method, $check, $classPrefix)
+    {
         $className = ucwords($classPrefix) . 'Validation';
         if (!class_exists($className)) {
-            trigger_error(__d('cake_dev', 'Could not find %s class, unable to complete validation.', $className), E_USER_WARNING);
+            trigger_error("Could not find {$className} class, unable to complete validation.", E_USER_WARNING);
             return false;
         }
         if (!method_exists($className, $method)) {
-            trigger_error(__d('cake_dev', 'Method %s does not exist on %s unable to complete validation.', $method, $className), E_USER_WARNING);
+            trigger_error("Method {$method} does not exist on {$className} unable to complete validation.", E_USER_WARNING);
             return false;
         }
         $check = (array) $check;
@@ -637,7 +673,8 @@ class CValidation {
      * @param string $regex Regular expression
      * @return boolean Success of match
      */
-    protected static function _check($check, $regex){
+    protected static function _check($check, $regex)
+    {
         if (is_string($regex) && preg_match($regex, $check)) {
             self::$errors[] = false;
             return true;
@@ -654,7 +691,8 @@ class CValidation {
      * @param array $params Parameters sent to validation method
      * @return void
      */
-    protected static function _defaults($params){
+    protected static function _defaults($params)
+    {
         self::_reset();
         $defaults = array(
             'check'   => null,
@@ -678,7 +716,8 @@ class CValidation {
      * @return boolean Success
      * @see http://en.wikipedia.org/wiki/Luhn_algorithm
      */
-    public static function luhn($check, $deep = false){
+    public static function luhn($check, $deep = false)
+    {
         if (is_array($check)) {
             extract(self::_defaults($check));
         }
@@ -703,7 +742,6 @@ class CValidation {
         return ($sum % 10 == 0);
     }
 
-
     /**
      * Checking for upload errors
      *
@@ -711,7 +749,8 @@ class CValidation {
      * @retrun boolean
      * @see http://www.php.net/manual/en/features.file-upload.errors.php
      */
-    public static function uploadError($check){
+    public static function uploadError($check)
+    {
         if (is_array($check) && isset($check['error'])) {
             $check = $check['error'];
         }
@@ -724,7 +763,8 @@ class CValidation {
      *
      * @return void
      */
-    protected static function _populateIp(){
+    protected static function _populateIp()
+    {
         if (!isset(self::$_pattern['IPv6'])) {
             $pattern = '((([0-9A-Fa-f]{1,4}:){7}(([0-9A-Fa-f]{1,4})|:))|(([0-9A-Fa-f]{1,4}:){6}';
             $pattern .= '(:|((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})';
@@ -754,8 +794,8 @@ class CValidation {
      *
      * @return void
      */
-    protected static function _reset(){
+    protected static function _reset()
+    {
         self::$errors = array();
     }
-
 }
