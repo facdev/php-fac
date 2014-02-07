@@ -60,7 +60,7 @@ class CObjectCollection implements \IteratorAggregate, \Countable
      *                             в функцию передаеться [значение поля, оъект, $args]
      * @param mixed    $args       дополнительные параметры, переданные в функцию
      *                             обратного вызова.
-     * @return ObjectCollection  колекция найденных объектов.
+     * @return \Fac\CObjectCollection  колекция найденных объектов.
      */
     public function find($name, $param = null, $args = null)
     {
@@ -101,7 +101,7 @@ class CObjectCollection implements \IteratorAggregate, \Countable
      *
      * @param string   $name    имя свойства
      * @param mixed    $value   устанавливаемое значение
-     * @return ObjectCollection
+     * @return \Fac\CObjectCollection
      */
     public function set($name, $value)
     {
@@ -133,7 +133,7 @@ class CObjectCollection implements \IteratorAggregate, \Countable
      *
      * @param stdObject   $object    позиция
      * @param int         $index     позиция
-     * @return ObjectCollection
+     * @return \Fac\CObjectCollection
      */
     public function addAt($object, $index = null)
     {
@@ -163,8 +163,8 @@ class CObjectCollection implements \IteratorAggregate, \Countable
     /**
      * Сливает масив объектов в текущюю колекцию
      *
-     * @param array|ObjectCollection $data
-     * @return \ObjectCollection
+     * @param array|\Fac\CObjectCollection $data
+     * @return \Fac\CObjectCollection
      */
     public function merge($data)
     {
@@ -189,7 +189,7 @@ class CObjectCollection implements \IteratorAggregate, \Countable
      * Удалить объект с указаной позиции из колеции.
      *
      * @param  int   $name    позиция
-     * @return ObjectCollection
+     * @return \Fac\CObjectCollection
      */
     public function removeAt($index = null)
     {
@@ -208,7 +208,7 @@ class CObjectCollection implements \IteratorAggregate, \Countable
      * Удалить объект.
      *
      * @param mixed $object
-     * @return \ObjectCollection
+     * @return \Fac\CObjectCollection
      */
     public function remove($object)
     {
@@ -229,7 +229,7 @@ class CObjectCollection implements \IteratorAggregate, \Countable
      *
      * @param callback $callback
      * @param mixed    $args
-     * @return ObjectCollection
+     * @return \Fac\CObjectCollection
      */
     public function each($callback, $args = null)
     {
@@ -252,7 +252,7 @@ class CObjectCollection implements \IteratorAggregate, \Countable
      *
      * @param callback|string $param  int callback ( mixed $a, mixed $b )
      * @param mixed    $args
-     * @return ObjectCollection
+     * @return \Fac\CObjectCollection
      */
     public function sort($param, $args = null)
     {
