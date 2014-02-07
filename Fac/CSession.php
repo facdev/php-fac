@@ -2,9 +2,9 @@
 /**
  * Session class  - Session.php file
  *
- * @author     Dmitryi Tyurin <fobia3d@gmail.com>
- * @copyright  Copyright (c) 2014 Dmitryi Tyurin
- * @license The MIT License (MIT) Dmitryi Tyurin
+ * @author     Dmitriy Tyurin <fobia3d@gmail.com>
+ * @copyright  Copyright (c) 2014 Dmitriy Tyurin
+ * @license The MIT License (MIT) Dmitriy Tyurin
  */
 
 namespace Fac;
