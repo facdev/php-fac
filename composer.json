@@ -19,5 +19,10 @@
             "Fac": "Fac"
         }
     },
-    "target-dir": ""
+    "target-dir": "",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
 }
