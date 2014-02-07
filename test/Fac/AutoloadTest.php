@@ -53,4 +53,10 @@ class AutoloadTest extends \PHPUnit_Framework_TestCase
         $obj = new \Fac\CSession();
         $this->assertInstanceOf('\Fac\CSession', $obj);
     }
+
+    public function testCObjectCollection()
+    {
+        $obj = new \Fac\CObjectCollection();
+        $this->assertInstanceOf('\Fac\CObjectCollection', $obj);
+    }
 }

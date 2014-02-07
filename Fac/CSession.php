@@ -12,28 +12,28 @@ namespace Fac;
 /**
  * Session class
  *
- * @method mixed ​cache_​expire
- * @method mixed ​cache_​limiter
- * @method mixed ​commit
- * @method mixed ​decode
- * @method mixed ​destroy
- * @method mixed ​encode
- * @method mixed ​get_​cookie_​params
- * @method mixed ​id
- * @method mixed ​is_​registered
- * @method mixed ​module_​name
- * @method mixed ​name
- * @method mixed ​regenerate_​id
- * @method mixed ​register_​shutdown
- * @method mixed ​register
- * @method mixed ​save_​path
- * @method mixed ​set_​cookie_​params
- * @method mixed ​set_​save_​handler
- * @method mixed ​start
- * @method mixed ​status
- * @method mixed ​unregister
- * @method mixed ​unset
- * @method mixed ​write_​close
+ * @method mixed cache_expire
+ * @method mixed cache_limiter
+ * @method mixed commit
+ * @method mixed decode
+ * @method mixed destroy
+ * @method mixed encode
+ * @method mixed get_cookie_params
+ * @method mixed id
+ * @method mixed is_registered
+ * @method mixed module_name
+ * @method mixed name
+ * @method mixed regenerate_id
+ * @method mixed register_shutdown
+ * @method mixed register
+ * @method mixed save_path
+ * @method mixed set_cookie_params
+ * @method mixed set_save_handler
+ * @method mixed start
+ * @method mixed status
+ * @method mixed unregister
+ * @method mixed unset
+ * @method mixed write_​lose
  *
  * @package		Fac
  */
