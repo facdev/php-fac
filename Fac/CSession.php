@@ -16,7 +16,6 @@ namespace Fac;
  * @method mixed cache_limiter
  * @method mixed commit
  * @method mixed decode
- * @method mixed destroy
  * @method mixed encode
  * @method mixed get_cookie_params
  * @method mixed id
@@ -29,8 +28,6 @@ namespace Fac;
  * @method mixed save_path
  * @method mixed set_cookie_params
  * @method mixed set_save_handler
- * @method mixed start
- * @method mixed status
  * @method mixed unregister
  * @method mixed unset
  * @method mixed write_​lose
@@ -40,10 +37,39 @@ namespace Fac;
 class CSession implements \Countable, \IteratorAggregate
 {
 
+    protected $start = false;
+
     public function __call($name, $arguments)
     {
         $callback = "session_" . $name;
         return call_user_func_array($callback, $arguments);
+    }
+
+    public function status()
+    {
+        if ($_SESSION) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function start()
+    {
+        if ($this->start) {
+            return;
+        }
+        session_start();
+        $this->start            = true;
+        $_SESSION['_timestamp'] = time();
+        \Log::trace("session start");
+    }
+
+    public function destroy()
+    {
+        session_destroy();
+        $this->start = false;
+        unset($_SESSION);
     }
 
     public function toArray()
