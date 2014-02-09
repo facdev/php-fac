@@ -72,6 +72,16 @@ class CSession implements \Countable, \IteratorAggregate
         unset($_SESSION);
     }
 
+    public function get($name)
+    {
+        return $_SESSION[$name];
+    }
+
+    public function set($name, $value)
+    {
+        $_SESSION[$name] = $value;
+    }
+
     public function toArray()
     {
         return $_SESSION;
